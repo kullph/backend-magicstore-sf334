@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  
