@@ -59,9 +59,9 @@ async def productCreate(
         port='5432'
         )
     
-    if not MgmtService.isHadById('element',element_id):
+    if not await MgmtService.isHadById('element',element_id):
         return {"status":False,"message":"false element id"}
-    if not MgmtService.isHadById('category',category_id):
+    if not await MgmtService.isHadById('category',category_id):
         return {"status":False,"message":"false category id"}
 
     pro_id = await conn.fetchval(
@@ -83,6 +83,13 @@ async def productCreate(
             ,pro_id ,img.filename
             )
     
+    await conn.execute(
+            '''
+            INSERT INTO search(product_id, category_id, element_id) VALUES($1, $2, $3)
+            '''
+            ,pro_id, category_id, element_id
+            )
+
     return {"status":True,"message":""}
 
 @router.put("/product")
