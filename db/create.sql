@@ -1,26 +1,32 @@
-CREATE TABLE Users (
-    ID SERIAL PRIMARY KEY,
-    Firstname VARCHAR(255),
-    Lastname VARCHAR(255),
-    Point INT
-);
-
 CREATE TABLE Authen (
     ID SERIAL PRIMARY KEY,
-    User_ID INT,
     Email VARCHAR(255),
-    Password VARCHAR(255),
-    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+    Password VARCHAR(255)
+);
+
+CREATE TABLE Users (
+    ID SERIAL PRIMARY KEY,
+    Authen_ID INT,
+    Firstname VARCHAR(255),
+    Lastname VARCHAR(255),
+    Point INT,
+    FOREIGN KEY (Authen_ID) REFERENCES Authen(ID)
 );
 
 CREATE TABLE Product (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Description TEXT,
-    Img_path TEXT,
     Price FLOAT,
     Left_Quantity INT,
     Sales_Quantity INT
+);
+
+CREATE TABLE Img (
+    ID SERIAL PRIMARY KEY,
+    Img VARCHAR(255),
+    Product_ID INT,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
 );
 
 CREATE TABLE Cart (
@@ -35,10 +41,16 @@ CREATE TABLE Cart (
 CREATE TABLE Ordered (
     ID SERIAL PRIMARY KEY,
     User_ID INT,
+    OrderDate TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+);
+
+CREATE TABLE Ordered_list (
+    ID SERIAL PRIMARY KEY,
+    Ordered_ID INT,
     Product_ID INT,
     Quantity INT,
-    OrderDate TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (Ordered_ID) REFERENCES Ordered(ID),
     FOREIGN KEY (Product_ID) REFERENCES Product(ID)
 );
 
@@ -66,7 +78,9 @@ CREATE TABLE Review (
 
 CREATE TABLE Category (
     ID SERIAL PRIMARY KEY,
-    Name VARCHAR(255)
+    Name VARCHAR(255),
+    Product_ID INT,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
 );
 
 CREATE TABLE Element (
