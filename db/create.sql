@@ -10,7 +10,17 @@ CREATE TABLE Users (
     Firstname VARCHAR(255),
     Lastname VARCHAR(255),
     Point INT,
-    FOREIGN KEY (Authen_ID) REFERENCES Authen(ID)
+    FOREIGN KEY (Authen_ID) REFERENCES Authen(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Category (
+    ID SERIAL PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
+CREATE TABLE Element (
+    ID SERIAL PRIMARY KEY,
+    Name VARCHAR(255)
 );
 
 CREATE TABLE Product (
@@ -18,15 +28,29 @@ CREATE TABLE Product (
     Name VARCHAR(255),
     Description TEXT,
     Price FLOAT,
+    Category_ID INT,
+    Element_ID INT,
     Left_Quantity INT,
-    Sales_Quantity INT
+    Sales_Quantity INT,
+    FOREIGN KEY (Category_ID) REFERENCES Category(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Element_ID) REFERENCES Element(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Search(
+    ID SERIAL PRIMARY KEY,
+    Product_ID INT,
+    Category_ID INT,
+    Element_ID INT,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Category_ID) REFERENCES Category(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Element_ID) REFERENCES Element(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Img (
     ID SERIAL PRIMARY KEY,
     Img VARCHAR(255),
     Product_ID INT,
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Cart (
@@ -34,15 +58,15 @@ CREATE TABLE Cart (
     User_ID INT,
     Product_ID INT,
     Quantity INT,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID),
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
+    FOREIGN KEY (User_ID) REFERENCES Users(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Ordered (
     ID SERIAL PRIMARY KEY,
     User_ID INT,
     OrderDate TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+    FOREIGN KEY (User_ID) REFERENCES Users(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Ordered_list (
@@ -50,8 +74,8 @@ CREATE TABLE Ordered_list (
     Ordered_ID INT,
     Product_ID INT,
     Quantity INT,
-    FOREIGN KEY (Ordered_ID) REFERENCES Ordered(ID),
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
+    FOREIGN KEY (Ordered_ID) REFERENCES Ordered(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Delivery_source (
@@ -63,7 +87,7 @@ CREATE TABLE Delivery_source (
     District VARCHAR(255),
     Subdistrict VARCHAR(255),
     Zipcode VARCHAR(255),
-    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+    FOREIGN KEY (User_ID) REFERENCES Users(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Review (
@@ -72,24 +96,9 @@ CREATE TABLE Review (
     Product_ID INT,
     Detail TEXT,
     Score INT,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID),
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
+    FOREIGN KEY (User_ID) REFERENCES Users(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Product_ID) REFERENCES Product(ID) ON DELETE CASCADE
 );
-
-CREATE TABLE Category (
-    ID SERIAL PRIMARY KEY,
-    Name VARCHAR(255),
-    Product_ID INT,
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
-);
-
-CREATE TABLE Element (
-    ID SERIAL PRIMARY KEY,
-    Name VARCHAR(255),
-    Product_ID INT,
-    FOREIGN KEY (Product_ID) REFERENCES Product(ID)
-);
-
 
 CREATE TABLE Action (
     ID SERIAL PRIMARY KEY,
@@ -101,5 +110,5 @@ CREATE TABLE Status (
     ID SERIAL PRIMARY KEY,
     Action_ID INT,
     status VARCHAR(255),
-    FOREIGN KEY (Action_ID) REFERENCES Action(ID)
+    FOREIGN KEY (Action_ID) REFERENCES Action(ID) ON DELETE CASCADE
 );
