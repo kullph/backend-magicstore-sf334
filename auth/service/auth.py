@@ -3,6 +3,8 @@ import hashlib
 import os
 from jose import jwt
 from datetime import datetime, timedelta, timezone
+import requests
+import math
 
 class AuthService:
     @staticmethod
@@ -37,3 +39,22 @@ class AuthService:
             raise HTTPException(status_code=401, detail="Token has expired")
         except jwt.JWTError:
             raise HTTPException(status_code=401, detail="Could not validate token")
+        
+    @staticmethod
+    def sentimental(text: str) -> int:
+        url = "https://api.aiforthai.in.th/ssense"
+        data = {'text':text}
+        headers = {
+        'Apikey': "AYisycokK7O5mby9enmQ37NxQaLSGd64"
+        }
+        response = requests.post(url, data=data, headers=headers)
+        x = response.json()
+        if x['sentiment']['polarity'] == 'positive':
+            result = x['sentiment']['score']
+            return int(math.floor(float(result)))
+        elif x['sentiment']['polarity'] == 'negative':
+            result = x['sentiment']['score']
+            return -int(math.floor(float(result)))
+        else:
+            result = x['sentiment']['score']
+            return int(math.floor(float(result)))

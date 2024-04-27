@@ -385,5 +385,29 @@ async def editEmail(
 
     return {"status":True,"message":"Finish"}
 
+@router.post("/review")
+async def review(
+    token:str = Depends(oauth2_scheme),
+    product_id:int=Form(...),
+    detail:str=Form(...)
+    ):
+    score = AuthService.sentimental(detail)
+    id = AuthService.decode_jwt(token)["sub"]
+
+    conn = await asyncpg.connect(
+        user='admin', 
+        password='0000', 
+        database='magic-store', 
+        host='localhost',
+        port='5432'
+    )
+
+    await conn.execute(
+            '''
+            INSERT INTO review(user_id,product_id,detail,score) VALUES($1,$2,$3,$4);
+            '''
+            ,int(id), product_id, detail, score
+        )
+
 
 
