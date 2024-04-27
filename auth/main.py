@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, Form, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware 
 import uvicorn
 
 def initialize_app():
     app = FastAPI()
-    app.mount("/static", StaticFiles(directory="../image"), name="static")
+    app.mount("/static", StaticFiles(directory="./image"), name="static")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
@@ -25,4 +25,4 @@ def initialize_app():
 app = initialize_app()
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
