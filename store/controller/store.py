@@ -7,7 +7,7 @@ import os
 
 router = APIRouter(
     prefix="/store",
-    tags=["store management"],
+    tags=["store"],
 )
 
 @router.get("/getAllShortend")

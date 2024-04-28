@@ -5,8 +5,44 @@ services:
       context: ./db
       dockerfile: Dockerfile
     container_name: db
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: auth
+    ports:
+      - "8001:8001"
+  storemgmt:
+    build:
+      context: ./storemgmt
+      dockerfile: Dockerfile
+    container_name: storemgmt
+    ports:
+      - "8002:8002"
+  store:
+    build:
+      context: ./store
+      dockerfile: Dockerfile
+    container_name: store
+    ports:
+      - "8003:8003"
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: dashboard
+    ports:
+      - "8004:8004"
