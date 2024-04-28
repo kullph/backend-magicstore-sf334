@@ -18,7 +18,7 @@ async def register(email:str=Form(...),password:str=Form(...)):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -62,7 +62,7 @@ async def login(email:str=Form(...),password:str=Form(...)):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -92,7 +92,7 @@ async def profileEdit(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -114,7 +114,7 @@ async def profileGet(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -142,7 +142,7 @@ async def deliveryEdit(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -164,7 +164,7 @@ async def deliveryget(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -188,7 +188,7 @@ async def cartAdd(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
     await conn.execute(
@@ -209,7 +209,7 @@ async def cartGet(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -229,7 +229,7 @@ async def cartClear(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -261,7 +261,7 @@ async def orderedAdd(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -293,7 +293,7 @@ async def orderedGet(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -350,7 +350,7 @@ async def editPassword(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -373,7 +373,7 @@ async def editEmail(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -398,7 +398,7 @@ async def review(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 

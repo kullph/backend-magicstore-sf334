@@ -13,7 +13,6 @@ def initialize_app():
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    app.mount("/static", StaticFiles(directory="../storemgmt/image"), name="static")
     from controller.dashboard import router as dashboard_router
     app.include_router(dashboard_router)
 
