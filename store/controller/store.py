@@ -1,6 +1,9 @@
-from fastapi import APIRouter, Form
+from fastapi import APIRouter, Form, Depends
+from model.storeModel import RawJSONData
+from service.store import StoreService
 import asyncpg
 import os
+
 
 router = APIRouter(
     prefix="/store",
@@ -359,3 +362,29 @@ async def productGetReview(id:int):
         )
     
     return {"status":True,"message":result}
+
+@router.patch("/buy")
+async def productGetReview(data:RawJSONData):
+    conn = await asyncpg.connect(
+        user='admin', 
+        password='0000', 
+        database='magic-store', 
+        host='localhost',
+        port='5432'
+    )
+
+    data=data.data
+
+    for item in data:
+        if not await StoreService.isHadById('product',item.product_id):
+            return {"status":False,"message":"false product id"}
+        
+    for item in data:
+        await conn.execute(
+        '''
+            UPDATE product SET sales_quantity = $1 WHERE id = $2;
+        '''
+        ,item.quantity, item.product_id
+        )
+
+    return {"status":True,"message":""}

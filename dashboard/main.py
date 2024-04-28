@@ -13,8 +13,9 @@ def initialize_app():
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    from controller.store import router as store_router
-    app.include_router(store_router)
+    app.mount("/static", StaticFiles(directory="../storemgmt/image"), name="static")
+    from controller.dashboard import router as dashboard_router
+    app.include_router(dashboard_router)
 
     @app.get("/")
     async def root():
@@ -25,4 +26,4 @@ def initialize_app():
 app = initialize_app()
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8003, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8004, reload=True)

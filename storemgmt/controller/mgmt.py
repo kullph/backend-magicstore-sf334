@@ -94,8 +94,55 @@ async def productCreate(
 
 @router.put("/product")
 async def productEdit(
+    product_id:int=Form(...),
+    name:str=Form(...),
+    description:str=Form(...),
+    price:float=Form(...),
+    left_quantity:int=Form(...),
+    file: list[UploadFile] = File(...),
+    category_id:int=Form(...),
+    element_id:int=Form(...)
     ):
-    pass
+    conn = await asyncpg.connect(
+        user='admin', 
+        password='0000', 
+        database='magic-store', 
+        host='localhost',
+        port='5432'
+        )
+    
+    if not await MgmtService.isHadById('element',element_id):
+        return {"status":False,"message":"false element id"}
+    if not await MgmtService.isHadById('category',category_id):
+        return {"status":False,"message":"false category id"}
+
+    pro_id = await conn.fetchval(
+        '''
+        INSERT INTO product(name, description, price, category_id, element_id, left_quantity, sales_quantity) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id;
+        '''
+        ,name,description,price,category_id,element_id,left_quantity,0
+        )
+    
+    for img in file:
+        file_path = os.path.join("./image", img.filename)
+        with open(file_path, "wb") as file_object:
+            file_object.write(await img.read())
+
+        await conn.execute(
+            '''
+            INSERT INTO img(img, product_id) VALUES($2,$1)
+            '''
+            ,pro_id ,img.filename
+            )
+    
+    await conn.execute(
+            '''
+            INSERT INTO search(product_id, category_id, element_id) VALUES($1, $2, $3)
+            '''
+            ,pro_id, category_id, element_id
+            )
+
+    return {"status":True,"message":""}
 
 @router.delete("/product")
 async def productDelete(
