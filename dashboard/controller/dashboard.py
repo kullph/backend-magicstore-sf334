@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Form
 import asyncpg
 import os
+from datetime import datetime
 
 router = APIRouter(
     prefix="/dashboard",
@@ -152,4 +153,71 @@ async def ordercompleted():
 
 @router.get("/graph")
 async def graph():
-    pass
+    conn = await asyncpg.connect(
+        user='admin', 
+        password='0000', 
+        database='magic-store', 
+        host='localhost',
+        port='5432'
+    )
+
+    products = await conn.fetch(
+        '''
+        SELECT * FROM ordered;
+        '''
+    )
+
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y-%m-%dT%H:%M:%S.%f")
+    today = formatted_datetime.split("T")[0]
+
+    result = {}
+    result[today] = {}
+    for hour in range(24):
+        h = await conn.fetch(
+        '''
+        SELECT * FROM ordered WHERE EXTRACT(HOUR FROM orderdate) = $1;
+
+        '''
+        ,hour
+        )
+
+        new_h = []
+        if len(h) != 0:
+            for order in h:
+                new_order = dict(order)
+                products = await conn.fetch(
+                    '''
+                    SELECT * FROM ordered_list WHERE ordered_id = $1;
+
+                    '''
+                    ,order['id']
+                    )
+                
+                total_price = 0
+                for pro in products:
+                    price = await conn.fetchval(
+                        '''
+                        SELECT price FROM product WHERE id = $1;
+
+                        '''
+                        ,pro['product_id']
+                        )
+                    q = pro['quantity']
+                    
+                    total_price += price * q 
+                new_order['price'] = total_price
+                new_h.append(new_order['price'])
+
+            h_price = 0
+            print(order['id'])
+            for p in new_h:
+                print(p)
+                h_price += p
+            print("full",h_price)
+                        
+            result[today][hour] = h_price
+        else:
+            result[today][hour] = []
+
+    return result
