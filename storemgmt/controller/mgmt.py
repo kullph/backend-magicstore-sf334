@@ -18,7 +18,7 @@ async def productGetAll(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -55,7 +55,7 @@ async def productCreate(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -107,7 +107,7 @@ async def productEdit(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -152,7 +152,7 @@ async def productDelete(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     await conn.execute(
@@ -171,7 +171,7 @@ async def categoryGetAll(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -192,7 +192,7 @@ async def categoryPost(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -216,7 +216,7 @@ async def categoryPut(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -237,7 +237,7 @@ async def categoryDel(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -257,7 +257,7 @@ async def elementGetAll(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -278,7 +278,7 @@ async def elementPost(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -302,7 +302,7 @@ async def elementPut(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     
@@ -323,7 +323,7 @@ async def elementDel(
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
         )
     

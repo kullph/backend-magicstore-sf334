@@ -16,7 +16,7 @@ async def productGetNameAndID():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -39,7 +39,7 @@ async def productGetByID(id:int):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -70,7 +70,7 @@ async def productGetByElemenIdt(element_id:int):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -111,7 +111,7 @@ async def productGetByCategoryId(category_id:int):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -151,7 +151,7 @@ async def productGetByElementName(element_name:str):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
     
@@ -200,7 +200,7 @@ async def productGetByCategoryName(category_name:str):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
     
@@ -250,7 +250,7 @@ async def productGetByElementAndCategory(element_id:int,category_id:int):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -291,7 +291,7 @@ async def productGetByElementAndCategory(element_name:str,category_name:str):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
     
@@ -350,7 +350,7 @@ async def productGetReview(id:int):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -369,7 +369,7 @@ async def productGetReview(data:RawJSONData):
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 

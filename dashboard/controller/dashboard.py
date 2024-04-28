@@ -14,7 +14,7 @@ async def revenue():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -37,7 +37,7 @@ async def topproduct():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -66,7 +66,7 @@ async def detail():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -117,7 +117,7 @@ async def totalsales():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -139,7 +139,7 @@ async def ordercompleted():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
@@ -157,7 +157,7 @@ async def graph():
         user='admin', 
         password='0000', 
         database='magic-store', 
-        host='localhost',
+        host='210.246.215.173',
         port='5432'
     )
 
